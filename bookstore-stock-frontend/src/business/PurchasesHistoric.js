@@ -15,7 +15,7 @@ export class PurchasesHistoric extends ModelBase {
  */
 export const getPurchasesHistorics = async () => {
     try {
-        return JSON.parse((await axios.get('http://localhost:8000/purchasesHistoric/')).data)
+        return JSON.parse((await axios.get('http://127.0.0.1:8000//purchasesHistoric/')).data)
     }
     catch {
         return;
@@ -29,7 +29,7 @@ export const getPurchasesHistorics = async () => {
  */
 export const postPurchasesHistorics = async (purchasesHistoric) => {
     try {
-        return await axios.post('http://localhost:8000/purchasesHistoric/', purchasesHistoric)
+        return await axios.post('http://127.0.0.1:8000//purchasesHistoric/', purchasesHistoric)
     }
     catch {
         return;
@@ -43,7 +43,7 @@ export const postPurchasesHistorics = async (purchasesHistoric) => {
  */
 export const putPurchasesHistoric = async (purchasesHistoric) => {
     try {
-        return await axios.put('http://localhost:8000/purchasesHistoric/', purchasesHistoric)
+        return await axios.put('http://127.0.0.1:8000//purchasesHistoric/', purchasesHistoric)
     }
     catch {
         return;
@@ -58,7 +58,7 @@ export const putPurchasesHistoric = async (purchasesHistoric) => {
  */
 export const deletePurchasesHistoric = async (purchasesHistoricId) => {
     try {
-        return await axios.delete(`http://localhost:8000/purchasesHistoric/${purchasesHistoricId}`, purchasesHistoricId)
+        return await axios.delete(`http://127.0.0.1:8000//purchasesHistoric/${purchasesHistoricId}`, purchasesHistoricId)
     }
     catch {
         return;

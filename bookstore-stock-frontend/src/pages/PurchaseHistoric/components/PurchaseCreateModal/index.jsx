@@ -88,31 +88,26 @@ export function PurchaseCreateModal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const purchase = { purchase_date, book_id, customer_id, quantity, price, method_payment };
-        console.log(purchase);
-        // await postPurchasesHistorics(purchase);
 
-        // Atualizar a quantidade de livros no estado e no backend
-        const updatedBook = { ...selectedBook, quantity: selectedBook.quantity - quantity };
-        await putBook(updatedBook);
-        console.log(updatedBook)
+        await postPurchasesHistorics(purchase);
 
         // Fetch atualizado dos livros
         const booksData = await getBooks();
         setBooks(booksData);
 
         // Limpar o formulário
-        // setPurchaseDate('');
-        // setBookId('');
-        // setCustomerId('');
-        // setPrice('');
-        // setQuantity('');
-        // setAvailableQuantity(0);
+        setPurchaseDate('');
+        setBookId('');
+        setCustomerId('');
+        setPrice('');
+        setQuantity('');
+        setAvailableQuantity(0);
 
         // Fechar o modal
-        // setOpen(false);
+        setOpen(false);
 
         // Recarregar a página
-        // window.location.reload();
+        window.location.reload();
     };
 
     const SelectItem = React.forwardRef(({ children, className, ...props }, forwardedRef) => (

@@ -20,12 +20,12 @@ class Book(ModelBase):
     publisher = models.CharField(max_length=200)
     editon = models.CharField(max_length=5)
     quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=50, decimal_places=2)
 
 class PurchasesHistoric(ModelBase):
     purchase_date = models.DateField(default=datetime.now())
     book_fk = models.ForeignKey(Book, on_delete=models.PROTECT)
     customer_fk = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=50, decimal_places=2)
     quantity = models.IntegerField()
     method_payment = models.CharField(max_length=60)

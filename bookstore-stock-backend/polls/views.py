@@ -63,22 +63,11 @@ def book(request):
 
         if(request.method == "PUT"):
             body = json.loads(request.body.decode('utf-8'))
-            book_id = body.get('id')
-            book = Book.objects.get(pk=book_id)
-            
-           # Atualizar a quantidade de livros disponíveis
-            if book.quantity >= body['quantity']:
-                book.quantity -= body['quantity']
-                book.save()
-                print(f'Updated book: {book.id} with data: {body}')  # Log the updated book details
-                return JsonResponse(True, safe=False)
-            else:
-                return JsonResponse({"error": "Quantidade de livros insuficiente"}, status=400)
+            book = Book(**body)
+            Book.objects.filter(pk=book.id, excluded=False).update(**body)
+            return JsonResponse(True, safe=False)
 
-            # body = json.loads(request.body.decode('utf-8'))
-            # book = Book(**body)
-            # Book.objects.filter(pk=book.id, excluded=False).update(**body)
-            # return JsonResponse(True, safe=False)
+
 
     except Exception as e:
         print(e)
@@ -109,23 +98,26 @@ def purchases_historic(request):
 
             book = Book.objects.get(id=body['book_id'])
             customer = Customer.objects.get(id=body['customer_id'])
-            
+
             # Atualize a quantidade de livros disponíveis
             if book.quantity >= body['quantity']:
                 book.quantity -= body['quantity']
                 book.save()
+
+                PurchasesHistoric.objects.create(
+                    book_fk=book,
+                    customer_fk=customer,
+                    price=body['price'],
+                    purchase_date=body['purchase_date'],
+                    quantity=body['quantity'],
+                    method_payment=body['method_payment']
+                )
+                # Book.objects.update(book=book)
                 return JsonResponse({"success": True, "message": "Quantidade de livro atualizada com sucesso", "updated_quantity": book.quantity})
             else:
                 return JsonResponse({"error": "Quantidade de livros insuficiente"}, status=400)
 
-            new_purchases_historic = PurchasesHistoric.objects.create(
-                book_fk=book,
-                customer_fk=customer,
-                price=body['price'],
-                purchase_date=body['purchase_date'],
-                quantity=body['quantity'],
-                method_payment=body['method_payment']
-            )
+
 
             return JsonResponse(True, safe=False)
 

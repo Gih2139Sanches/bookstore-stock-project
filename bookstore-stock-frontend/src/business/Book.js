@@ -18,7 +18,7 @@ export class Book extends ModelBase {
  */
 export const getBooks = async () => {
     try {
-        return JSON.parse((await axios.get('http://localhost:8000/book/')).data)
+        return JSON.parse((await axios.get('http://127.0.0.1:8000//book/')).data)
     }
     catch {
         return;
@@ -32,7 +32,7 @@ export const getBooks = async () => {
  */
 export const postBooks = async (book) => {
     try {
-        return await axios.post('http://localhost:8000/book/', book)
+        return await axios.post('http://127.0.0.1:8000//book/', book)
     }
     catch {
         return;
@@ -46,7 +46,7 @@ export const postBooks = async (book) => {
  */
 export const putBook = async (book) => {
     try {
-        return await axios.put(`http://localhost:8000/book/${book.id}/`, book);
+        return await axios.put(`http://127.0.0.1:8000//book/`, book);
     }
     catch (error) {
         console.error("Error updating book:", error);
@@ -61,7 +61,7 @@ export const putBook = async (book) => {
 //  */
 // export const putBook = async (book) => {
 //     try {
-//         return await axios.put('http://localhost:8000/book/', book)
+//         return await axios.put('http://127.0.0.1:8000//book/', book)
 //     }
 //     catch {
 //         return;
@@ -91,7 +91,7 @@ export const checkBooksPurchase = async (bookId) => {
  */
 export const deleteBook = async (bookId) => {
     try {
-        return await axios.delete(`http://localhost:8000/book/${bookId}`, bookId)
+        return await axios.delete(`http://127.0.0.1:8000//book/${bookId}`, bookId)
     }
     catch {
         return;

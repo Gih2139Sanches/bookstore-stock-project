@@ -15,7 +15,7 @@ export class Customer extends ModelBase {
  */
 export const getCustomers = async () => {
     try {
-        return JSON.parse((await axios.get('http://localhost:8000/customer/')).data)
+        return JSON.parse((await axios.get('http://127.0.0.1:8000//customer/')).data)
     }
     catch (error){
         console.log(error)
@@ -30,7 +30,7 @@ export const getCustomers = async () => {
  */
 export const postCustomers = async (customer) => {
     try {
-        return await axios.post('http://localhost:8000/customer/', customer)
+        return await axios.post('http://127.0.0.1:8000//customer/', customer)
     }
     catch {
         return ;
@@ -44,7 +44,7 @@ export const postCustomers = async (customer) => {
  */
 export const putCustomer = async (customer) => {
     try {
-        return await axios.put('http://localhost:8000/customer/', customer)
+        return await axios.put('http://127.0.0.1:8000//customer/', customer)
     }catch (error) {
         console.error('Erro ao atualizar o cliente:', error);
         throw error;
@@ -74,7 +74,7 @@ export const checkCustomerPurchase = async (customerId) => {
  */
 export const deleteCustomer = async (customerId) => {
     try {
-        return await axios.delete(`http://localhost:8000/customer/${customerId}`, customerId)
+        return await axios.delete(`http://127.0.0.1:8000//customer/${customerId}`, customerId)
     }
     catch {
         return;
